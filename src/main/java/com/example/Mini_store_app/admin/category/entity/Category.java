@@ -3,6 +3,8 @@ package com.example.Mini_store_app.admin.category.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.example.Mini_store_app.admin.products.entity.Product;
+import java.util.List;
 
 import java.time.Instant;
 
@@ -44,6 +46,9 @@ public class Category {
 
     @Column(name = "deleted")
     private Boolean deleted = false;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> products;
 
     public Long getId() {
         return id;
@@ -123,5 +128,13 @@ public class Category {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
